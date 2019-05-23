@@ -14,6 +14,7 @@ public class UserDaoImpl implements UserDao {
 
 	public UserDaoImpl() {
 		System.out.println("我被创建了");
+		System.out.println("aaa");
 	}
 
 
