@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <!-- lazy-init控制bean创建的延迟加载，如果是true就getBean时候创建，否则容器初始化的时候创建 -->
+	<!-- <bean id="userDao" class="cn.tx.dao.impl.UserDaoImpl" lazy-init="false"></bean> -->
+	
+	<!-- 
+	scope:singleton在spring中bean单例的
+		  prototype是多例的，必须是延迟加载
+		  如果是多例的（prototype）那么没有办法设置非延迟加载
+	 -->
+	<!-- <bean id="userDao" class="cn.tx.dao.impl.UserDaoImpl" scope="prototype"></bean> -->
+	<!-- 
+		id是bean的唯一标识
+		class：工厂类
+		factory-method:工厂的方法
+	 -->
+	<bean id="user" class="cn.tx.factory.BeanFactory" factory-method="createUser"></bean>
+
+	<!-- 定义实例工厂bean -->
+	<bean id="beanFactory" class="cn.tx.factory.BeanFactory1"></bean>
+	<!-- 引入实例工厂 -->
+	<bean id="user1" factory-bean="beanFactory" factory-method="createUser"></bean>
+	
+	<bean id="userDao" class="cn.tx.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy"></bean>
+</beans>
